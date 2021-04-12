@@ -4,9 +4,9 @@ if ! command -v yay &> /dev/null
 then
     echo -e "\e[1;31mYay could not be found.\e[0m"
     echo "Please install yay with the following commands:"
-    echo "sudo pacman -Syu --noconfirm"
+    echo "sudo pacman -S --needed git base-devel"
     echo "git clone https://aur.archlinux.org/yay.git ~/.yay"
-    echo "cd ~/.yay && makepkg -si"+
+    echo "cd ~/.yay && makepkg -si"
     echo "rm -rf ~/.yay"
     exit
 fi
