@@ -2,7 +2,7 @@
 
 if ! command -v yay &> /dev/null
 then
-    echo -e "\e[1;31mYay could not be found.\e[0m"
+    echo -e "\e[1;31mYay could not be found. Make sure to enable AUR BEFORE installing it.\e[0m"
     echo "Please install yay with the following commands:"
     echo "sudo pacman -S --needed git base-devel"
     echo "git clone https://aur.archlinux.org/yay.git ~/.yay"
@@ -13,7 +13,7 @@ fi
 
 declare -a packages=("visual-studio-code-bin" "brave" "typora" 
 "insomnia-bin" "docker" "docker-compose" "discord_arch_electron" 
-"noto-fonts-emoji" "ttf-fira-code" "font-manager")
+"noto-fonts-emoji" "ttf-fira-code" "font-manager" "nerd-fonts-fira-mono")
 
 for pkg in ${packages[@]}
 do

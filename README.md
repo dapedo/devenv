@@ -1,6 +1,12 @@
-# Ambiente de Desenvolvimento
+# Development environment
 
-### Primeiro instalar o yay
+### `install.sh`
+
+This script will install every package listed in the packages array.
+Before the install it's necessary to have AUR enabled and yay (a AUR package manager) installed.
+Now just run `bash install.sh` in the file directory. Sometimes it will request sudo permissions.
+
+### First install yay
 
 ```shell
  pacman -Sq --needed --noconfirm git base-devel
@@ -9,7 +15,7 @@
  rm -rf ~/.yay
 ```
 
-### Agora os programas principais
+### Now the main packages
 
 ```shell
 yay -Sq visual-studio-code-bin --needed --noconfirm
@@ -19,35 +25,13 @@ yay -Sq insomnia-bin --needed --noconfirm
 yay -Sq docker --needed --noconfirm
 yay -Sq docker-compose --needed --noconfirm
 yay -Sq discord_arch_electron --needed --noconfirm
-```
-
-### Frufrus adicionais
-
-Suporte para emoji, e nerd fonts
-
-```shell
 yay -Sq noto-fonts-emoji --needed --noconfirm
-yay -Sq ttf-fira-code --needed --noconfirm # For vscode
 yay -Sq font-manager --needed --noconfirm
+yay -Sq ttf-fira-code --needed --noconfirm # For vscode
+yay -Sq nerd-fonts-fira-mono --needed --noconfirm # For terminal
 ```
 
-Nerd Font para terminal, baixar a Fira Mono Regular desse [Link do git](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraMono/Regular/complete/Fira%20Mono%20Regular%20Nerd%20Font%20Complete.otf) e instalar com font-manager.
-
-Terminal mais lindo de todos
-
-```shell
-chsh -s $(which zsh) # zsh is now default, logout to make effect
-
-# In zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-```
-
-### Instalações manuais
+### Others
 
 ```shell
 yay wine
