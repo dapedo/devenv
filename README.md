@@ -14,3 +14,4 @@ Now just run `bash install.sh` in the file directory. Sometimes it will request 
  cd ~/.yay && makepkg -si
  rm -rf ~/.yay
 ```
+
