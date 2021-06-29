@@ -2,8 +2,8 @@
 
 ### `install.sh`
 
-This script will install every package listed in the packages array.
-Before the install it's necessary to have AUR enabled and yay (a AUR package manager) installed.
+This script will install every package listed in the packages arrays.
+Before the install it's necessary to have AUR enabled, yay (a AUR package manager) installed and Flatpak installed.
 Now just run `bash install.sh` in the file directory. Sometimes it will request sudo permissions.
 
 ### Yay installation
@@ -14,4 +14,3 @@ Now just run `bash install.sh` in the file directory. Sometimes it will request 
  cd ~/.yay && makepkg -si
  rm -rf ~/.yay
 ```
-
