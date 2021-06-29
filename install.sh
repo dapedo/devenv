@@ -30,7 +30,28 @@ flatpak_install() {
     done
 }   
 
+asdf_install() {
+  # The zshrc file has a default plugin that recognizes asdf
+  cd ~
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+}
+
+# TODO: Automate zsh installation
+zsh_install() {
+  # Oh my zsh installation
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+  cp ./dotfiles/.zshrc ~
+
+  git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+
+  echo "Please restart for changes to make effect"
+}
+
 aur_install
 flatpak_install
+asdf_install
 
 exit
