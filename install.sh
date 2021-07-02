@@ -14,7 +14,7 @@ fi
 declare -a aur_packages=("visual-studio-code-bin" "brave" "typora" 
 "insomnia-bin" "docker" "docker-compose" 
 "noto-fonts-emoji" "ttf-fira-code" "font-manager" "nerd-fonts-fira-mono")
-declare -a flatpak_packages=("com.discordapp.Discord" "com.spotify.Client")
+declare -a flatpak_packages=("com.discordapp.Discord" "com.spotify.Client" "com.slack.Slack")
 
 aur_install() {
   for pkg in ${aur_packages[@]}
@@ -26,7 +26,7 @@ aur_install() {
 flatpak_install() {
   for pkg in ${flatpak_packages[@]}
     do
-      flatpak install flathub com.spotify.Client
+      flatpak install ${pkg} --noninteractive
     done
 }   
 
@@ -44,7 +44,6 @@ zsh_install() {
   cp ./dotfiles/.zshrc ~
 
   git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
   echo "Please restart for changes to make effect"
