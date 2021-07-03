@@ -13,7 +13,7 @@ fi
 
 declare -a aur_packages=("visual-studio-code-bin" "brave" "typora" 
 "insomnia-bin" "docker" "docker-compose" 
-"noto-fonts-emoji" "ttf-fira-code" "font-manager" "nerd-fonts-fira-mono")
+"noto-fonts-emoji" "ttf-fira-code" "font-manager" "nerd-fonts-fira-mono" "yarn")
 declare -a flatpak_packages=("com.discordapp.Discord" "com.spotify.Client" "com.slack.Slack")
 
 aur_install() {
