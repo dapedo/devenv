@@ -2,15 +2,8 @@
 
 ### `install.sh`
 
-This script will install every package listed in the packages arrays.
-Before the install it's necessary to have AUR enabled, yay (a AUR package manager) installed and Flatpak installed.
-Now just run `bash install.sh` in the file directory. Sometimes it will request sudo permissions.
+This script will automatically install the following packages: Typora, VsCode, Insomnia, zsh, grub-customizer. As well as some needed dependencies.
 
-### Yay installation
+### How to use
 
-```shell
- pacman -Sq --needed --noconfirm git base-devel
- git clone https://aur.archlinux.org/yay.git ~/.yay
- cd ~/.yay && makepkg -si
- rm -rf ~/.yay
-```
+Just execute `sudo sh install.sh` and you're good to go. By now it will stop on the oh my zsh installation, since it opens the oh my zsh process, so you have to continue manually.

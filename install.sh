@@ -1,56 +1,69 @@
 #!/usr/bin/bash
 
-if ! command -v yay &> /dev/null
-then
-  echo -e "\e[1;31mYay could not be found. Make sure to enable AUR BEFORE installing it.\e[0m"
-  echo "Please install yay with the following commands:"
-  echo "sudo pacman -S --needed git base-devel"
-  echo "git clone https://aur.archlinux.org/yay.git ~/.yay"
-  echo "cd ~/.yay && makepkg -si"
-  echo "rm -rf ~/.yay"
-  exit
-fi
+# Initial dependencies
+apt-get install git wget curl
 
-declare -a aur_packages=("visual-studio-code-bin" "brave" "typora" 
-"insomnia-bin" "docker" "docker-compose" 
-"noto-fonts-emoji" "ttf-fira-code" "font-manager" "nerd-fonts-fira-mono" "yarn")
-declare -a flatpak_packages=("com.discordapp.Discord" "com.spotify.Client" "com.slack.Slack")
+# Public keys / Additional repositories
+wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+add-apt-repository 'deb https://typora.io/linux ./' -y
+add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" -y
+add-apt-repository ppa:git-core/ppa -y
+add-apt-repository ppa:danielrichter2007/grub-customizer -y
+echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" \
+    | tee -a /etc/apt/sources.list.d/insomnia.list 
 
-aur_install() {
-  for pkg in ${aur_packages[@]}
-    do
-      yay ${pkg} -Sq --needed --noconfirm
-    done
-}
 
-flatpak_install() {
-  for pkg in ${flatpak_packages[@]}
-    do
-      flatpak install ${pkg} --noninteractive
-    done
-}   
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"| tee /etc/apt/sources.list.d/brave-browser-release.list
 
-asdf_install() {
-  # The zshrc file has a default plugin that recognizes asdf
-  cd ~
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
-}
+# Get latest package lists
+apt-get update
 
-# TODO: Automate zsh installation
-zsh_install() {
-  # Oh my zsh installation
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Remove older packages 
+apt-get remove docker docker-engine docker.io containerd runc
 
-  cp ./dotfiles/.zshrc ~
+# Install the packages
+apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    gnupg \
+    lsb-release \
+    software-properties-common \
+    typora \
+    code \
+    insomnia \
+    brave-browser 
+    fonts-firacode \
+    git \
+    libssl-dev \
+    zlib1g-dev \
+    libreadline-dev \
+    zlib1g-dev \
+    libpq-dev \
+    grub-customizer \
+    zsh
 
-  git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+git config --global user.name "Pedro Henrique dos Santos"
+git config --global user.email pedro.santos@cjr.org.br
 
-  echo "Please restart for changes to make effect"
-}
+chsh -s $(which zsh) # Make zsh the default shell
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 
-aur_install
-flatpak_install
-asdf_install
+# Adds the flathub remote
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-exit
+# Installs flatpak packages
+flatpak install flathub com.discordapp.Discord --noninteractive
+flatpak install flathub com.spotify.Client --noninteractive
+flatpak install flathub com.slack.Slack --noninteractive
+
+# Install oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# Clone p10k theme and put it on themes folder
+git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+
+# Clone plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
