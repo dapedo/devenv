@@ -33,7 +33,7 @@ apt-get install -y \
     typora \
     code \
     insomnia \
-    brave-browser 
+    brave-browser \
     fonts-firacode \
     git \
     libssl-dev \
@@ -54,12 +54,12 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Installs flatpak packages
-flatpak install flathub com.discordapp.Discord --noninteractive
+#flatpak install flathub com.discordapp.Discord --noninteractive
 flatpak install flathub com.spotify.Client --noninteractive
 flatpak install flathub com.slack.Slack --noninteractive
 
 # Install oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Clone p10k theme and put it on themes folder
 git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
