@@ -42,7 +42,8 @@ apt-get install -y \
     zlib1g-dev \
     libpq-dev \
     grub-customizer \
-    zsh
+    zsh \
+    scrcpy
 
 git config --global user.name "Pedro Henrique dos Santos"
 git config --global user.email pedro.santos@cjr.org.br
@@ -59,7 +60,7 @@ flatpak install flathub com.spotify.Client --noninteractive
 flatpak install flathub com.slack.Slack --noninteractive
 
 # Install oh my zsh
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Clone p10k theme and put it on themes folder
 git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
