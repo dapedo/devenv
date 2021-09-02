@@ -6,13 +6,14 @@ apt-get install git wget curl
 # Public keys / Additional repositories
 wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
 add-apt-repository 'deb https://typora.io/linux ./' -y
 add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" -y
 add-apt-repository ppa:git-core/ppa -y
 add-apt-repository ppa:danielrichter2007/grub-customizer -y
 echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" \
     | tee -a /etc/apt/sources.list.d/insomnia.list 
-
+add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 
 curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"| tee /etc/apt/sources.list.d/brave-browser-release.list
@@ -34,6 +35,7 @@ apt-get install -y \
     code \
     insomnia \
     brave-browser \
+    vivaldi-stable \
     fonts-firacode \
     git \
     libssl-dev \
